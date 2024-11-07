@@ -38,13 +38,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: test on freebsd
+      - name: test on Solaris
         uses: vmactions/solaris-vm@v1
         with:
           usesh: true
           mem: 4096
           copyback: false
-          prepare: uname -a
+          prepare: uname -a; rustc --version
 
   test:
     strategy:
