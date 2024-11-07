@@ -31,6 +31,21 @@ jobs:
             echo "~~~~ freebsd-version ~~~~"
             freebsd-version
           run: $HOME/.cargo/bin/cargo build --all-targets && $HOME/.cargo/bin/cargo test && $HOME/.cargo/bin/cargo test --manifest-path fuzz/Cargo.toml && $HOME/.cargo/bin/cargo test -p quinn-udp --benches
+  test-solaris:
+  # see https://github.com/actions/runner/issues/385
+  # use https://github.com/vmactions/freebsd-vm for now
+    name: test on freebsd
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: test on freebsd
+        uses: vmactions/solaris-vm@v1
+        with:
+          usesh: true
+          mem: 4096
+          copyback: false
+          prepare: uname -a
+
   test:
     strategy:
       matrix:
