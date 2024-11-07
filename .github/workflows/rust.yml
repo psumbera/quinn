@@ -34,7 +34,7 @@ jobs:
   test-solaris:
   # see https://github.com/actions/runner/issues/385
   # use https://github.com/vmactions/freebsd-vm for now
-    name: test on freebsd
+    name: test on solaris
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
