@@ -44,7 +44,8 @@ jobs:
           usesh: true
           mem: 4096
           copyback: false
-          prepare: uname -a; rustc --version
+          prepare: uname -a; wget https://github.com/psumbera/solaris-openjdk/releases/download/openjdk16-bootstrap/openjdk-16.0.2-bootstrap_SunOS-i386_bin.tar.xz ; gtar xfv openjdk-16.0.2-bootstrap_SunOS-i386_bin.tar.xz
+          run: gcc --version
 
   test:
     strategy:
