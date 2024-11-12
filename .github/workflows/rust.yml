@@ -50,7 +50,9 @@ jobs:
             rustc --version
             echo "~~~~ Solaris-version ~~~~"
             uname -a
-          run: $HOME/.rust_solaris/bin/cargo build --all-targets && $HOME/.rust_solaris/bin/cargo test && $HOME/.rust_solaris/bin/cargo test --manifest-path fuzz/Cargo.toml && $HOME/.rust_solaris/bin/cargo test -p quinn-udp --benches
+          run: |
+            export PATH=$HOME/.rust_solaris/bin:$PATH
+            cargo build --all-targets && cargo test && $HOME/.rust_solaris/bin/cargo test --manifest-path fuzz/Cargo.toml && cargo test -p quinn-udp --benches
   test:
     strategy:
       matrix:
