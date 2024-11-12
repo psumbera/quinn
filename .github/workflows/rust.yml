@@ -52,6 +52,9 @@ jobs:
             uname -a
           run: |
             export PATH=$HOME/.rust_solaris/bin:$PATH
+            rustc --version
+            pwd
+            cat .git/config 
             cargo build --all-targets && cargo test && $HOME/.rust_solaris/bin/cargo test --manifest-path fuzz/Cargo.toml && cargo test -p quinn-udp --benches
   test:
     strategy:
