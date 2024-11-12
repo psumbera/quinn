@@ -44,8 +44,10 @@ jobs:
           usesh: true
           mem: 4096
           copyback: false
-          prepare: uname -a; wget https://github.com/psumbera/solaris-openjdk/releases/download/openjdk16-bootstrap/openjdk-16.0.2-bootstrap_SunOS-i386_bin.tar.xz ; gtar xfv openjdk-16.0.2-bootstrap_SunOS-i386_bin.tar.xz
-          run: gcc --version
+          prepare: |
+            source <(curl -s https://raw.githubusercontent.com/psumbera/solaris-rust/refs/heads/main/sh.rust-web-install)
+            gcc --version
+          run: $HOME/.cargo/bin/cargo build --all-targets && $HOME/.cargo/bin/cargo test && $HOME/.cargo/bin/cargo test --manifest-path fuzz/Cargo.toml && $HOME/.cargo/bin/cargo test -p quinn-udp --benches
 
   test:
     strategy:
