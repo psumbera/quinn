@@ -30,7 +30,7 @@ jobs:
             $HOME/.cargo/bin/rustc --version
             echo "~~~~ freebsd-version ~~~~"
             freebsd-version
-          run: HOME/.cargo/bin/cargo build --all-targets && $HOME/.cargo/bin/cargo test && $HOME/.cargo/bin/cargo test --manifest-path fuzz/Cargo.toml && $HOME/.cargo/bin/cargo test -p quinn-udp --benches
+          run: $HOME/.cargo/bin/cargo build --all-targets && $HOME/.cargo/bin/cargo test && $HOME/.cargo/bin/cargo test --manifest-path fuzz/Cargo.toml && $HOME/.cargo/bin/cargo test -p quinn-udp --benches
   test-solaris:
   # see https://github.com/actions/runner/issues/385
   # use https://github.com/vmactions/freebsd-vm for now
@@ -50,8 +50,7 @@ jobs:
             rustc --version
             echo "~~~~ Solaris-version ~~~~"
             uname -a
-          run: cargo build --all-targets && cargo test && cargo test --manifest-path fuzz/Cargo.toml && cargo test -p quinn-udp --benches
-
+          run: $HOME/.rust_solaris/bin/cargo build --all-targets && $HOME/.rust_solaris/bin/cargo test && $HOME/.rust_solaris/bin/cargo test --manifest-path fuzz/Cargo.toml && $HOME/.rust_solaris/bin/cargo test -p quinn-udp --benches
   test:
     strategy:
       matrix:
