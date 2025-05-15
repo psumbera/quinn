@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ['main', '0.8.x']
+    branches: ['main', '0.8.x', 'CAB']
   pull_request:
   merge_group:
   schedule:
@@ -87,7 +87,7 @@ jobs:
           # Unlike others, don't un-ignore stress tests, because they hang on Solaris
           run: |
             export PATH=$HOME/.rust_solaris/bin:$PATH
-            export CARGO_HTTP_MULTIPLEXING=false
+            CARGO_HTTP_DEBUG=true CARGO_LOG=cargo::ops::registry=debug cargo fetch
             cargo build --locked --all-targets && cargo test --locked --manifest-path fuzz/Cargo.toml && cargo test --locked -p quinn-udp --benches
 
   test-illumos:
